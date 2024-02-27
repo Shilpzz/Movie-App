@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title={name}>
+        <template lwc:if={validUrl}>
+          <img 
+            src={profileUrl} 
+            alt="User Image" 
+            width="100%"/>
+        </template>
+        <template lwc:else>
+          <div class="slds-var-p-left_medium">
+            Profile picture not available
+          </div>
+        </template>
+    </lightning-card>
+    
+</template>

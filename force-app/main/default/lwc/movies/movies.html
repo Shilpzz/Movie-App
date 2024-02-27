@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Movies">
+      <lightning-button label="Get Movies" slot="actions" onclick={getMyMovies}></lightning-button>
+      <template for:each={movies} for:item="movie">
+        <lightning-card key={movie.Id} title={movie.Name}>
+            <lightning-avatar size="large"   
+            src={movie.Poster_URL__c} class="slds-m-right_small" slot="actions">
+          </lightning-avatar>
+        </lightning-card>
+      </template>
+    </lightning-card>
+  </template>
