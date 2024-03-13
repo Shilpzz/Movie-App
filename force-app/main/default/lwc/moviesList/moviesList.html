@@ -1,0 +1,30 @@
+<template>
+    <lightning-layout multiple-rows>
+      <template for:each={movies} for:item="movie">
+        <lightning-layout-item key={movie.Id} size="12" small-device-size="12" medium-device-size="6" large-device-size="4" padding="around-small">
+          <div class="slds-box slds-box_xx-small">
+            <lightning-card title={movie.Name}>
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                  <template lwc:if={movie.Poster_URL__c}>
+                    <img src={movie.Poster_URL__c} width="100%"/>
+                  </template>
+                  <template lwc:else>
+                    <div class="slds-text-heading_large slds-align_absolute-center">No Poster</div>
+                  </template>
+                </div>
+                <div class="slds-col slds-var-p-around_medium slds-size_1-of-2">
+                  <p class="slds-var-p-around_small">{movie.Release_Date__c}</p>
+                  <p class="slds-var-p-around_small">{movie.Original_Language__c}</p>
+                  <p class="slds-var-p-around_small">{movie.Genres__c}</p>
+                  <p class="slds-var-p-around_small">Runtime: {movie.Runtime_Minutes__c} minutes</p>
+                  <p class="slds-var-p-around_small">Tagline: {movie.Tagline__c}</p>
+                  <lightning-button label='View More' onclick={showDetails} slot="actions" data-movie-id={movie.Id}></lightning-button>
+                </div>
+              </div>
+            </lightning-card>
+          </div>
+        </lightning-layout-item>
+      </template>
+    </lightning-layout>
+  </template>

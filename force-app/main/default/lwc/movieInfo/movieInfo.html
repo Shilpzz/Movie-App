@@ -1,0 +1,59 @@
+<template>
+<template lwc:if={movie}>
+    <lightning-card title= {movie.Name}>
+        <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+            <template lwc:if={movie.Poster_URL__c}>
+              <img src={movie.Poster_URL__c} width="100%"/>
+            </template>
+            <template lwc:else>
+              <div class="slds-text-heading_large slds-align_absolute-center">No Poster</div>
+            </template>
+        </div>
+          
+        <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                    <div class="slds-text-title_bold">Original Language:</div>
+                    <div>{movie.Original_Language__c}</div>
+                    <div class="slds-text-title_bold">Original Title:</div>
+                    <div>{movie.Original_Title__c}</div>
+                    <div class="slds-text-title_bold">Release Date:{formattedReleaseDate}</div>
+                    <div>{movie.Release_Date__c}</div>
+                    <div class="slds-text-title_bold">Genres:</div>
+                    <div>{movie.Genres__c}</div>
+                    <div class="slds-text-title_bold">Tmdb-Id:</div>
+                    <div>{movie.Tmdb_Id__c}</div>
+                    <div class="slds-text-title_bold">Runtime:</div>
+                    <div>{movie.Runtime_Minutes__c} minutes</div>
+                    <div class="slds-text-title_bold">Tagline:</div>
+                    <div>{movie.Tagline__c} minutes</div>
+                    <div class="slds-text-title_bold">Overview:</div>
+                    <div>{movie.Overview__c}</div>
+
+                    <div class="slds-text-title_bold slds-p-top_medium">Cast Members</div>
+                    <div class="slds-grid slds-wrap">
+                        <template for:each={movieCast} for:item="castMember">
+                            <div key={castMember.Id} class="slds-col slds-size_1-of-3 slds-p-around_small slds-box">
+                                <div class="slds-text-heading_small slds-p-top_small">{castMember.Actor_Id__r.Name}</div>
+                                <div onclick={handleActorClick} data-actor-id={castMember.Actor_Id__c} style="cursor: pointer;">
+                                    <template lwc:if={castMember.Actor_Id__r.Profile_URL__c}>
+                                        <img src={castMember.Actor_Id__r.Profile_URL__c} alt={castMember.Actor_Id__r.Name} width="100%" />
+                                    </template>
+                                    <template lwc:else>
+                                        <div class="slds-text-heading_large slds-align_absolute-center">
+                                            NO PROFILE IMAGE
+                                        </div>
+                                    </template>
+                                </div>
+                                <p class="slds-text-heading_small slds-p-top_small">Character Name: {castMember.Name}</p>
+                            </div>
+                        </template>
+                    </div>
+        </div>
+    </div>
+    <lightning-button label="Back" onclick={handleBack} slot="footer"></lightning-button>
+    </lightning-card>
+</template>
+
+</template>
+
+

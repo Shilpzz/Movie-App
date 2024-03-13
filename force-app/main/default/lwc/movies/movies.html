@@ -1,12 +1,18 @@
 <template>
-    <lightning-card title="Movies">
-      <lightning-button label="Get Movies" slot="actions" onclick={getMyMovies}></lightning-button>
-      <template for:each={movies} for:item="movie">
-        <lightning-card key={movie.Id} title={movie.Name}>
-            <lightning-avatar size="large"   
-            src={movie.Poster_URL__c} class="slds-m-right_small" slot="actions">
-          </lightning-avatar>
-        </lightning-card>
-      </template>
-    </lightning-card>
-  </template>
+  <lightning-card title={headerTitle}>
+    <template lwc:if={showMovies}>
+      
+      <lightning-button-icon icon-name="utility:chevronleft" alternative-text="Previous" title="Previous" label='Previous' onclick={previous} slot="footer" disabled={previousDisabled} class="slds-m-right_x-small"></lightning-button-icon>
+      <lightning-button-icon icon-name="utility:chevronright" alternative-text="Next" title="Next" label='Next' onclick={next} slot="footer" disabled={nextDisabled}></lightning-button-icon>
+      
+      <c-movies-list onselectmovie={handleMovieSelected} movies={movies}></c-movies-list>
+    </template>
+    <template lwc:if={showMovie}>
+      <c-movie-info ongoback={handleGoBack} onactorclick={handleActorSelected}  movie={selectedMovie}></c-movie-info>
+    </template>
+    <template lwc:if={showActor}>
+      <c-actor-info ongoback={handleGoBack} actor-id={selectedActorId}></c-actor-info>
+    </template>
+  </lightning-card>
+</template>
+
